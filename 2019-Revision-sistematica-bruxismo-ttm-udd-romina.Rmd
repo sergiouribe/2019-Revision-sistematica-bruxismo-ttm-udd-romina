@@ -1,10 +1,24 @@
 ---
 title: "2018 Romina RS Grosor músculos y bruxismo del sueño"
-output: html_notebook
+author: Analisis por Sergio Uribe
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+
+output: 
+  html_notebook: 
+    toc: yes
+    toc_float: true
+    fig_caption: true
 ---
 
+# Autores
+
+1. Romina Pedreros (DDS). Cirujano Dentista, Estudiante de Postgrado Trastornos Temporomandibulares y Dolor Orofacial, Facultad de Medicina Universidad del Desarrollo, Santiago, Chile. 
+1. Rodrigo Casassus (DDS, MS). Cirujano Dentista, Especialista en Trastornos Temporomandibulares y Dolor Orofacial Universidad de Kentucky. Profesor Asociado y Director Postgrado Trastornos Temporomandibulares y Dolor Orofacial, Facultad de Medicina, Universidad del Desarrollo, Santiago, Chile.
+1. María Carolina Díaz (DDS). Cirujano Dentista. Especialista en Trastornos Temporomandibulares y Dolor Orofacial Universidad Andrés Bello. Profesor Asociado y Subdirectora Postgrado Trastornos Temporomandibulares y Dolor Orofacial, Facultad de Medicina, Universidad del Desarrollo, Santiago, Chile. 
+
+
 # Paquetes
-```{r}
+```{r, warning=FALSE}
 library(tidyverse)
 install.packages("meta")
 library(meta)
@@ -134,7 +148,7 @@ apriete
 ```{r}
 forest.meta(apriete)
 ```
-#### Apriete por músculo
+### Apriete por músculo
 
 #### apriete masetero
 
