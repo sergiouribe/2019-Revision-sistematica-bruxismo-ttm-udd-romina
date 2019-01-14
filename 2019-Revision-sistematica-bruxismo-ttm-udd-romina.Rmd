@@ -1,0 +1,183 @@
+---
+title: "2018 Romina RS Grosor músculos y bruxismo del sueño"
+output: html_notebook
+---
+
+# Paquetes
+```{r}
+library(tidyverse)
+install.packages("meta")
+library(meta)
+```
+
+
+# Dataset
+```{r}
+df <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vSF0IaPzgT1j8zZjCRttANxOh948pFZVaQvBfRafzdfHjDox2lc1KgMGjBfrbqh0HWdtjPXQbYXDhm1/pub?gid=0&single=true&output=csv")
+```
+
+
+# EDA
+```{r}
+head(df)
+```
+```{r}
+summary(df)
+```
+```{r}
+glimpse(df)
+```
+
+## Subsets
+
+```{r}
+masetero <- c(1, 2)
+temporal <- c(3, 4)
+```
+
+# Data cleaning
+
+```{r}
+df <- janitor::clean_names(df)
+```
+
+```{r}
+glimpse(df)
+```
+
+
+
+# MA
+## Relajada
+```{r}
+relajada <- metacont(n_en_el_grupo_con_bruxismo,
+         promedio_musculo_grupo_bruxismo_posicion_relajada,
+         desviacion_estandar_grupo_bruxismo_posicion_relajada, 
+         n_en_el_grupo_control, 
+         promedio_musculo_grupo_control_posicion_relajada, 
+         desviacion_estandar_grupo_control_posicion_relajada, 
+         data = df, 
+         sm = "SMD")
+
+```
+
+```{r}
+relajada
+```
+
+
+```{r}
+forest.meta(relajada)
+```
+
+### relajada por musculo
+
+#### Relajado masetero
+```{r}
+relajada_masetero <- metacont(n_en_el_grupo_con_bruxismo,
+         promedio_musculo_grupo_bruxismo_posicion_relajada,
+         desviacion_estandar_grupo_bruxismo_posicion_relajada, 
+         n_en_el_grupo_control, 
+         promedio_musculo_grupo_control_posicion_relajada, 
+         desviacion_estandar_grupo_control_posicion_relajada, 
+         subset = masetero, 
+         data = df, 
+         sm = "SMD")
+```
+
+```{r}
+relajada_masetero
+```
+
+```{r}
+forest(relajada_masetero)
+```
+
+#### Relajado temporal
+```{r}
+relajada_temporal <- metacont(n_en_el_grupo_con_bruxismo,
+         promedio_musculo_grupo_bruxismo_posicion_relajada,
+         desviacion_estandar_grupo_bruxismo_posicion_relajada, 
+         n_en_el_grupo_control, 
+         promedio_musculo_grupo_control_posicion_relajada, 
+         desviacion_estandar_grupo_control_posicion_relajada, 
+         subset = temporal, 
+         data = df, 
+         sm = "SMD")
+```
+
+```{r}
+relajada_temporal
+```
+
+```{r}
+forest(relajada_temporal)
+```
+
+## Apriete máximo
+```{r}
+apriete <- metacont(n_en_el_grupo_con_bruxismo,
+         promedio_musculo_grupo_bruxismo_maximo_apriete,
+         desviacion_estandar_grupo_bruxismo_maximo_apriete, 
+         n_en_el_grupo_control, 
+         promedio_musculo_grupo_control_maximo_apriete, 
+         desviacion_estandar_grupo_control_maximo_apriete, 
+         data = df, 
+         sm = "SMD")
+
+```
+```{r}
+apriete
+```
+
+
+```{r}
+forest.meta(apriete)
+```
+#### Apriete por músculo
+
+#### apriete masetero
+
+```{r}
+apriete_masetero <- metacont(n_en_el_grupo_con_bruxismo,
+         promedio_musculo_grupo_bruxismo_maximo_apriete,
+         desviacion_estandar_grupo_bruxismo_maximo_apriete, 
+         n_en_el_grupo_control, 
+         promedio_musculo_grupo_control_maximo_apriete, 
+         desviacion_estandar_grupo_control_maximo_apriete, 
+         subset = masetero, 
+         data = df, 
+         sm = "SMD")
+
+```
+```{r}
+apriete_masetero
+```
+
+
+```{r}
+forest.meta(apriete_masetero)
+```
+
+
+#### apriete temporal
+```{r}
+apriete_temporal <- metacont(n_en_el_grupo_con_bruxismo,
+         promedio_musculo_grupo_bruxismo_maximo_apriete,
+         desviacion_estandar_grupo_bruxismo_maximo_apriete, 
+         n_en_el_grupo_control, 
+         promedio_musculo_grupo_control_maximo_apriete, 
+         desviacion_estandar_grupo_control_maximo_apriete, 
+         subset = temporal, 
+         data = df, 
+         sm = "SMD")
+
+```
+```{r}
+apriete_temporal
+```
+
+
+```{r}
+forest.meta(apriete_temporal)
+```
